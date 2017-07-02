@@ -9,13 +9,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class AdvertController extends Controller
 {
 
-    public function indexAction($page)
+    public function indexAction()
     {
-        if ($page < 1) {
-            throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
-        }
         return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
-            'nom'=> 'toto'
+            'listAdverts'=>array()
+        ));
+    }
+
+    public function menuAction($limit)
+    {
+        $listAdverts=array(
+            array('id'=>2, 'title'=>'Recherche développeur Symfony'),
+            array('id'=>5, 'title'=>'Mission de Webmaster'),
+            array('id'=>9, 'title'=>'Offre de stage webdesigner')
+        );
+        return $this->render('OCPlatformBundle:Advert:menu.html.twig', array(
+            'listAdverts' => $listAdverts
         ));
     }
 
