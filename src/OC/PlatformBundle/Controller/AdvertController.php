@@ -5,14 +5,38 @@ namespace OC\PlatformBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class AdvertController extends Controller
 {
 
     public function indexAction()
     {
+        $listAdverts = array(
+            array(
+                'title'=>'Recherche développeur Symfony',
+                'id'=>1,
+                'author'=>'Thomas',
+                'content'=>'nous recherchons un développeur Symfony débutant sur Besancon. Lorem ...',
+                'date'=>new \DateTime()
+            ),
+            array(
+                'title'=>'Mission de webmaster',
+                'id'=>2,
+                'author'=>'Cyril',
+                'content'=>'Nous recherchons un webmaster capable de maintenir notre site internet. Lorem... ',
+                'date'=>new \DateTime()
+            ),
+            array(
+                'title'=>'Offre de stage webdesigner',
+                'id'=>3,
+                'author'=>'Adeline',
+                'content'=>'Nous proposons un poste pour webdesigner. Lorem ... ',
+                'date'=>new \DateTime()
+            )
+        );
         return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
-            'listAdverts'=>array()
+            'listAdverts'=>$listAdverts
         ));
     }
 
@@ -30,8 +54,16 @@ class AdvertController extends Controller
 
     public function viewAction($id)
     {
+        $advert=array(
+            'title'=>'Recherche développeur Symfony',
+            'id'=>$id,
+            'author'=>'Thomas',
+            'content'=>'nous recherchons un développeur Symfony débutant sur Besancon. Lorem ...',
+            'date'=>new \DateTime()
+        );
+
         return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-            'id' => $id
+            'advert'=>$advert
         ));
     }
 
@@ -46,11 +78,17 @@ class AdvertController extends Controller
 
     public function editAction($id, Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
-            return $this->redirectToRoute('oc_platform_view', array('id' => 5));
-        }
-        return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+        $advert = array(
+            'title' => 'Recherche développeur Symfony',
+            'id' => $id,
+            'author' => 'Thomas',
+            'content' => 'nous recherchons un développeur Symfony débutant sur Besancon. Lorem ...',
+            'date' => new \DateTime()
+        );
+
+        return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
+            'advert'=>$advert
+        ));
     }
 
     public function deleteAction($id)
