@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Controller;
+namespace OC\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CoreBundle:Default:index.html.twig');
+        return $this->render('OCCoreBundle:Default:index.html.twig');
     }
 }
