@@ -15,7 +15,7 @@
             <div id="header" class="jumbotron">
                 <h1>Ma plate-forme d'annonces</h1>
                 <p>
-                    Ce projet est propulsé par Symfony, et crée grâce au tutotiel de openclassroom
+                    Ce projet est propulsé par Symfony, et crée grâce au tutoriel de openclassroom
                 </p>
                 <p>
                     <a href="" class="btn btn-primary btn-lg">Participer au MOOC</a>
@@ -25,7 +25,8 @@
                 <div id="menu" class="col-md-3">
                     <h3>Les annonces</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{{ path('oc_platform_home') }}">Accueil</a></li>
+                        <li><a href="{{ path('oc_core_home') }}">Accueil du site</a></li>
+                        <li><a href="{{ path('oc_platform_home') }}">Accueil des annonces</a></li>
                         <li><a href="{{ path('oc_platform_add') }}">Ajouter une annonce</a></li>
                     </ul>
 
@@ -46,6 +47,8 @@
         </div>
 
         {%  block javascript %}
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         {% endblock %}
 
     </body>

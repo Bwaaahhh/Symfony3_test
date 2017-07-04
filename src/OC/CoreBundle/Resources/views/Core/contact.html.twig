@@ -1,0 +1,36 @@
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Contact - {{  parent() }}
+{%  endblock %}
+
+{%  block body %}
+    <h1>Formulaire de contact</h1>
+
+    <hr>
+
+    <div>
+        {% for message in app.session.flashbag.get('info') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        {% for message in app.session.flashbag.get('notice') %}
+            <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p style="padding-top: 5% ">
+                <a href="{{ path('oc_core_home') }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                    Pour retourner à l'accueil c'est ici
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+
+
+{% endblock %}
