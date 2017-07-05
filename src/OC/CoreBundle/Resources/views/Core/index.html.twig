@@ -14,8 +14,15 @@
         <div id="header" class="jumbotron">
             <h2>Page d'accueil de mon site ... wouhou</h2>
             <p>
-                Ce projet est propulsé par Symfony, et crée grâce au tutoriel de openclassroom
+                Ce projet est propulsé par Symfony, et créé grâce au tutoriel de openclassroom
             </p>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center" style="padding-bottom: 2%" >
+                {% for message in app.session.flashbag.get('info') %}
+                    <p class="btn btn-md btn-info">Message flash : {{ message }}</p>
+                {% endfor %}
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-center">

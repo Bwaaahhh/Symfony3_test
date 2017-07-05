@@ -1,4 +1,7 @@
+{#ERREUR DE MA PART JE LA LAISSE DE COTE POUR PLUS TARD#}
+
 {% extends "OCCoreBundle::layout.html.twig" %}
+
 
 {% block title %}
     Contact - {{  parent() }}
@@ -8,17 +11,6 @@
     <h1>Formulaire de contact</h1>
 
     <hr>
-
-    <div>
-        {% for message in app.session.flashbag.get('info') %}
-            <p>Message flash : {{ message }}</p>
-        {% endfor %}
-    </div>
-    <div>
-        {% for message in app.session.flashbag.get('notice') %}
-            <p>Message flash : {{ message }}</p>
-        {% endfor %}
-    </div>
 
     <div class="row">
         <div class="col-md-12">

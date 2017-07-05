@@ -17,6 +17,6 @@ class CoreController extends Controller
     public function contactAction()
     {
         $this->get('session')->getFlashBag()->add('info', 'La page de contact nest pas encore disponible') ;
-        return $this->render('OCCoreBundle:Core:contact.html.twig');
+        return $this->redirectToRoute('oc_core_home');
     }
 }
