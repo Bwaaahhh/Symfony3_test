@@ -14,6 +14,12 @@ class Advert
 {
 
     /**
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
+
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
