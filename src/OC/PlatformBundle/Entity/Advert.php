@@ -3,10 +3,11 @@
 namespace OC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection ;
 
 /**
  * Advert
- *
+ * @ORM\Entity
  * @ORM\Table(name="oc_advert")
  * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertRepository")
  */
@@ -17,6 +18,12 @@ class Advert
      * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Category", cascade={"persist"})
+     * @ORM\JoinTable(name="oc_advert_category")
+     */
+    private $categories;
 
 
     /**
@@ -64,8 +71,18 @@ class Advert
     public function __construct()
     {
         $this->date = new \Datetime();
+        $this->categories = new ArrayCollection() ;
     }
 
+    public function setImage(Image $image=null)
+    {
+        $this->image=$image ;
+    }
+
+    public function getImage()
+    {
+        return $this->image ;
+    }
 
     /**
      * Get id
@@ -195,5 +212,39 @@ class Advert
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \OC\PlatformBundle\Entity\Category $category
+     *
+     * @return Advert
+     */
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \OC\PlatformBundle\Entity\Category $category
+     */
+    public function removeCategory(Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

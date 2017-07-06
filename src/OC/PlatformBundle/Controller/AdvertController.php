@@ -3,6 +3,8 @@
 namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Advert;
+use OC\PlatformBundle\Entity\Image ;
+use OC\PlatformBundle\Entity\Application ;
 use OC\PlatformBundle\OCPlatformBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -57,18 +59,21 @@ class AdvertController extends Controller
 
     public function viewAction($id)
     {
-        $repository=$this->getDoctrine()
-            ->getManager()
-            ->getRepository('OCPlatformBundle:Advert');
-
-        $advert=$repository->find($id);
+        $em = $this->getDoctrine()->getManager() ;
+        $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
 
         if(null === $advert){
             throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas. ");
         }
 
+        $listApplications = $em
+            ->getRepository('OCPlatformBundle:Application')
+            ->findBy(array('advert'=>$advert))
+        ;
+
         return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-            'advert'=>$advert
+            'advert'=>$advert,
+            'listApplications'=>$listApplications
         ));
     }
 
@@ -76,11 +81,32 @@ class AdvertController extends Controller
     {
         $advert = new Advert();
         $advert->setTitle('Recherche développeur Symfony.');
-        $advert->setAuthor('Thomas');
+        $advert->setAuthor('Adeline');
         $advert->setContent('Nous recherchons un développeur Symfony débutant sur Besancon. Lorem ...');
+
+        $image = new Image();
+        $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg') ;
+        $image->setAlt('Job de reve') ;
+
+        $advert->setImage($image) ;
+
+        $application1 = new Application() ;
+        $application1->setAuthor('Thomas');
+        $application1->setContent('Je suis baleze');
+
+        $application2 = new Application() ;
+        $application2->setAuthor('Adede');
+        $application2->setContent('Moi moi moi');
+
+        $application1->setAdvert($advert) ;
+        $application2->setAdvert($advert) ;
+
 
         $em=$this->getDoctrine()->getManager();
         $em->persist($advert);
+
+        $em->persist($application1) ;
+        $em->persist($application2) ;
         $em->flush();
 
         if($request->isMethod('POST')){

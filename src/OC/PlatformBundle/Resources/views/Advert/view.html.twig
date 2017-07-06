@@ -9,10 +9,23 @@
     <h2>{{ advert.title }}</h2>
     <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
 
+    {% if advert.image is not null %}
+        <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+    {% endif %}
+
     <div class="well">
         {{ advert.content }}
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Listes des candidatures</p>
+            {% for candidature in listApplications %}
+                <p>Par : {{ candidature.author }}</p>
+                <p>Qui dit : {{ candidature.content }}</p>
+            {% endfor %}
 
+        </div>
+    </div>
     <p>
         <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>
