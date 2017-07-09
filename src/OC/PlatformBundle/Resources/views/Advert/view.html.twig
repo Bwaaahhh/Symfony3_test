@@ -23,9 +23,20 @@
                 <p>Par : {{ candidature.author }}</p>
                 <p>Qui dit : {{ candidature.content }}</p>
             {% endfor %}
-
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% if not advert.categories.empty %}
+                <p>Cette annonce est parue dans les catégories suivantes :
+                    {% for category in advert.categories %}
+                        {{ category.name }} {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
     <p>
         <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>
