@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AdvertSkill
  *
  * @ORM\Table(name="oc_advert_skill")
- * @ORM\Entity(repositoryClass="OC\PlatformBundle\Repository\AdvertSkillRepository")
+ * @ORM\Entity
  */
 class AdvertSkill
 {
@@ -73,6 +73,26 @@ class AdvertSkill
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function setAdvert(Advert $advert)
+    {
+        $this->advert = $advert ;
+    }
+
+    public function getAdvert()
+    {
+        return $this->advert ;
+    }
+
+    public function setSkill(Skill $skill)
+    {
+        $this->skill = $skill ;
+    }
+
+    public function getSkill()
+    {
+        return $this->skill ;
     }
 }
 
